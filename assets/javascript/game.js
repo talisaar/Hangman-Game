@@ -3,9 +3,14 @@
 <!-- An array of words -->
 
 var wordbank = ['poop', 'scandal', 'miggs'];
-var lettersReplaced = 0;
+var numlettersReplaced = 0;
 var failedAttempts = 0;
-var alreadyTried = [];
+var alreadyTriedandfailed = [];
+var alreadyTriedandsucceeded = [];
+var beenguessed = 0;
+var guessedremaining = 15;
+
+
 
 
 
@@ -65,13 +70,18 @@ console.log(underscoreWord);
 
 
 
+
+
+
 <!-- step2: write the underscore word into document with getElementById method -->
 <!-- *** THIS WILL FAIL IF THE DOM HASNT LOADED *** -->
 
 
 function writeUnderscoreWord(){
 
+
 document.getElementById("word-innerhtml").innerHTML = underscoreWord;
+document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessedremaining;
 
 
 }
@@ -83,59 +93,144 @@ window.onload = writeUnderscoreWord;
 
 function start() { 
 writeUnderscoreWord();
+
 } 
 window.onload = start; 
 
 
-<!-- Check if letter exists or not in the randomWord array--> 
 
 
 
+<!-- what happens on key press --> 
+
+     <!-- success checker is set to 0, and if at least one replacement is made it will be different from zero. This is later used to determine wheter a guess succeeded or failed --> 
 
 
     document.onkeyup = function(event) {
 
+
+
      var guessedLetter = event.key;
-     console.log(guessedLetter);
-     var successChecker = lettersReplaced;
+     console.log("guessed letter: " + guessedLetter);
+     var successChecker = 0;
+     console.log("success checker: " +successChecker);
+     var numguesses = 0;
+
+
+
+<!-- a function that checks if letter has already been guessed before -->
+
+                  function hasbeenUsed(x) {
+
+                  beenguessed = 0;
+
+                  for (var i = 0; i < alreadyTriedandsucceeded.length; i++) {
+
+
+                            if (x === alreadyTriedandsucceeded[i]) {
+                            console.log("alreadyTriedandsucceeded");
+                            beenguessed++;
+                            console.log(beenguessed);
+
+                                               }
+
+                          };
+
+
+                  for (var i = 0; i < alreadyTriedandfailed.length; i++) {
+
+
+                            if (x === alreadyTriedandfailed[i]) {
+                            console.log("alreadyTriedandfailed");
+                            beenguessed++;
+                            console.log(beenguessed);
+
+
+                                               }
+                                    }
+
+                          };
+
+
+<!-- a function to replace index in underscore array with the wanted letter--> 
 
      function replaceLetter(i) {
 
      underscoresArray[i] = underscoresArray[i].replace("_", guessedLetter);
      console.log(underscoresArray);
+     underscoreWord = underscoresArray.join(" ");
+     console.log(underscoreWord);
+     document.getElementById("word-innerhtml").innerHTML = underscoreWord;
+
+
+
 
                                }
 
 
+<!-- ONLY IF LETTER HAS NOT BEEN GUESSED look for guessed letter in each index of randomword array and if found - replace that index in the underscore array with letter. Add one to "numletterReplaced" to count. Check success checker to see if any letters have been replaced.  --> 
+
+
+
+     successChecker = 0;
+
+     hasbeenUsed(guessedLetter);
+
+
+    if (beenguessed === 0 && guessedLetter !== "Shift" && event.key !== "Meta") {
+
+                  console.log(event);
+                 guessedremaining--;
+                 document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessedremaining;
+
 
      for (var i = 0; i < randomWord.length; i++) {
+
+
 
                             if (guessedLetter === randomWord[i]) {
                             console.log("letterExists");
                             replaceLetter(i);
-                            alreadyTried.push(guessedLetter);
-                            lettersReplaced = lettersReplaced+1;
-                            console.log(lettersReplaced);
+                            numlettersReplaced = numlettersReplaced+1;
+                            successChecker++;
+                            console.log("success checker : "+successChecker);
+
+
                                                }
 
 
                             else {
-                            console.log("LetterDoesNotExist");
+                            console.log("success checker : "+successChecker);
+
                           };
 
 
                                                }
+                            
 
 
+<!-- if the letter existed at least once, the success checker will be different from zero. If it is zero letter is pushed into  alreadyTriedandfailed array. If it is diferent from zero letter is pushed into alreadyTriedandsucceeded --> 
 
-                            if (successChecker = lettersReplaced) {
+                        if (successChecker === 0) {
+                            alreadyTriedandfailed.push(guessedLetter);
+                            console.log("letters tried and failed: "+alreadyTriedandfailed);
+                            document.getElementById("alreadyguessed-innerhtml").innerHTML = "Letters already guessed: "+alreadyTriedandfailed;
 
-                            alreadyTried.push(guessedLetter);
-                            console.log(alreadyTried);
                           }
 
+                          if (successChecker !== 0) {
+                            alreadyTriedandsucceeded.push(guessedLetter);
+                            console.log("letters tried and succeeded: "+alreadyTriedandsucceeded);
+                          }
+
+                            console.log("letters replaced :" + numlettersReplaced);
+                            console.log("success checker: "+successChecker);
 
 
+
+
+
+      }
 
 
       }
@@ -177,4 +272,3 @@ window.onload = start;
     return word.substr(0, index-1) +replacement+ word.substr(index-1 + replacement.length);
 }
 
-console.log(replaceat('hello', 7, 'r'))
