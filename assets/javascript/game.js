@@ -1,4 +1,4 @@
-
+var games = 0;
 var wins = 0;
 nextTurn();
 
@@ -10,14 +10,7 @@ function nextTurn() {
 
 console.log("newturn");
 
-var isfirstgame = true;
-console.log("isfirstgame: "+isfirstgame);
-
-if (wins !== 0) {
-  isfirstgame = false;
-  console.log("isfirstgame: "+isfirstgame);
-}
-
+ 
 
 
 // <!-- An array of words -->
@@ -87,7 +80,7 @@ underscoreWord = (underscoreWord + "_ ")
 
 console.log(underscoreWord);
 
-if (isfirstgame === false) {
+if (games !== 0) {
 console.log("this ain't ya first game");
 document.getElementById("word-innerhtml").innerHTML = underscoreWord;
 document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessesremaining;
@@ -261,6 +254,7 @@ window.onload = start;
                             console.log("length is "+randomWord.length);
                             console.log("letters replaced is: "+numlettersReplaced);
 
+                            // winning condition
 
                             if (numlettersReplaced === randomWord.length){
                             console.log("win");
@@ -269,7 +263,8 @@ window.onload = start;
                             document.getElementById("wins-innerhtml").innerHTML = "Wins: "+wins;
                             document.getElementById("previoswordwas-innerhtml").innerHTML = "Previous word was: "+randomWord;
                             document.getElementById("alreadyguessed-innerhtml").innerHTML = "Letters already guessed: ";
-
+                            games++;
+                            document.getElementById("games-innerhtml").innerHTML = "games: "+games;
 
                             nextTurn();
 
@@ -278,13 +273,17 @@ window.onload = start;
                           }
 
 
+                          // losing condition
+
+
                           if (guessesremaining === 0) {
 
                           document.getElementById("previoswordwas-innerhtml").innerHTML = "Previous word was: "+randomWord;
                           document.getElementById("alreadyguessed-innerhtml").innerHTML = "Letters already guessed: ";
                           guessesremaining = 15;
                           document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessesremaining;
-
+                          games++;
+                          document.getElementById("games-innerhtml").innerHTML = "games: "+games;
 
                           nextTurn();
 
