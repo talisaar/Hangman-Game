@@ -24,7 +24,7 @@ var failedAttempts = 0;
 var alreadyTriedandfailed = [];
 var alreadyTriedandsucceeded = [];
 var beenguessed = 0;
-var guessedremaining = 15;
+var guessesremaining = 15;
 
 
 
@@ -88,7 +88,7 @@ console.log(underscoreWord);
 if (isfirstgame === false) {
 console.log("this ain't ya first game");
 document.getElementById("word-innerhtml").innerHTML = underscoreWord;
-document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessedremaining;
+document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessesremaining;
 
 }
 
@@ -104,7 +104,7 @@ function writeUnderscoreWord(){
 
 
 document.getElementById("word-innerhtml").innerHTML = underscoreWord;
-document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessedremaining;
+document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessesremaining;
 
 
 }
@@ -208,8 +208,11 @@ window.onload = start;
     if (beenguessed === 0 && guessedLetter !== "Shift" && event.key !== "Meta") {
 
                  console.log(event);
-                 guessedremaining--;
-                 document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessedremaining;
+                 guessesremaining--;
+                 document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessesremaining;
+
+
+                 
 
 
      for (var i = 0; i < randomWord.length; i++) {
@@ -263,12 +266,27 @@ window.onload = start;
                             console.log("wins: "+wins);
                             document.getElementById("wins-innerhtml").innerHTML = "Wins: "+wins;
                             document.getElementById("previoswordwas-innerhtml").innerHTML = "Previous word was: "+randomWord;
+                            document.getElementById("alreadyguessed-innerhtml").innerHTML = "Letters already guessed: ";
+
 
                             nextTurn();
 
 
                             
                           }
+
+
+                          if (guessesremaining === 0) {
+
+                          document.getElementById("previoswordwas-innerhtml").innerHTML = "Previous word was: "+randomWord;
+                          document.getElementById("alreadyguessed-innerhtml").innerHTML = "Letters already guessed: ";
+                          guessesremaining = 15;
+                          document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessesremaining;
+
+
+                          nextTurn();
+
+                 }
 
 
 
