@@ -1,6 +1,22 @@
 
+var wins = 0;
+nextTurn();
 
-<!-- An array of words -->
+// The entire game is wrapped in the function nextTurn which is called upon in case of a win or loose
+
+function nextTurn() {
+
+var isfirstgame = true;
+console.log("isfirstgame: "+isfirstgame);
+
+if (wins !== 0) {
+  isfirstgame = false;
+  console.log("isfirstgame: "+isfirstgame);
+}
+
+
+
+// <!-- An array of words -->
 
 var wordbank = ['poop', 'scandal', 'miggs'];
 var numlettersReplaced = 0;
@@ -15,14 +31,14 @@ var guessedremaining = 15;
 
 
 
-<!-- randomly select a word from array -->
+// <!-- randomly select a word from array -->
 
 var randomWord = wordbank[Math.floor(Math.random() * wordbank.length)];
 
 console.log(randomWord);
 
 
-<!-- create an array with letters in this word-->
+// <!-- create an array with letters in this word-->
 
 var charArray = [];
 
@@ -35,9 +51,9 @@ console.log(charArray);
 }
 
 
-<!-- METHOD1 -->
+// <!-- METHOD1 -->
 
- <!-- step one: create an array with underscored as many as in this word -->
+ // <!-- step one: create an array with underscored as many as in this word -->
 
 
 var underscoresArray = [];
@@ -55,7 +71,8 @@ console.log(underscoresArray);
 
 
 
-<!-- step two create a word of underscores. -->
+
+// <!-- step two create a word of underscores. -->
 
 
 var underscoreWord = "";
@@ -68,13 +85,19 @@ underscoreWord = (underscoreWord + "_ ")
 
 console.log(underscoreWord);
 
+if (isfirstgame === false) {
+console.log("this ain't ya first game");
+document.getElementById("word-innerhtml").innerHTML = underscoreWord;
+document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessedremaining;
+
+}
 
 
 
 
 
-<!-- step2: write the underscore word into document with getElementById method -->
-<!-- *** THIS WILL FAIL IF THE DOM HASNT LOADED *** -->
+// <!-- step2: write the underscore word into document with getElementById method -->
+// <!-- *** THIS WILL FAIL IF THE DOM HASNT LOADED *** -->
 
 
 function writeUnderscoreWord(){
@@ -89,7 +112,7 @@ document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remai
 
 window.onload = writeUnderscoreWord;
 
-<!-- Start function activates the function above and is triggered on window.onload - is useful to have a separate start function because it can trigger multiple functions that nee to start after dom loaded  -->
+//<!-- Start function activates the function above and is triggered on window.onload - is useful to have a separate start function because it can trigger multiple functions that nee to start after dom loaded  -->
 
 function start() { 
 writeUnderscoreWord();
@@ -101,14 +124,16 @@ window.onload = start;
 
 
 
-<!-- what happens on key press --> 
+// <!-- what happens on key press --> 
 
-     <!-- success checker is set to 0, and if at least one replacement is made it will be different from zero. This is later used to determine wheter a guess succeeded or failed --> 
+//      <!-- success checker is set to 0, and if at least one replacement is made it will be different from zero. This is later used to determine wheter a guess succeeded or failed --> 
+
+
 
 
     document.onkeyup = function(event) {
 
-
+  
 
      var guessedLetter = event.key;
      console.log("guessed letter: " + guessedLetter);
@@ -118,7 +143,7 @@ window.onload = start;
 
 
 
-<!-- a function that checks if letter has already been guessed before -->
+// <!-- a function that checks if letter has already been guessed before -->
 
                   function hasbeenUsed(x) {
 
@@ -130,7 +155,10 @@ window.onload = start;
                             if (x === alreadyTriedandsucceeded[i]) {
                             console.log("alreadyTriedandsucceeded");
                             beenguessed++;
+                            numlettersreplaced++;
                             console.log(beenguessed);
+                            console.log("letters replaced: "+numlettersreplaced)
+
 
                                                }
 
@@ -152,7 +180,7 @@ window.onload = start;
                           };
 
 
-<!-- a function to replace index in underscore array with the wanted letter--> 
+// <!-- a function to replace index in underscore array with the wanted letter--> 
 
      function replaceLetter(i) {
 
@@ -168,7 +196,7 @@ window.onload = start;
                                }
 
 
-<!-- ONLY IF LETTER HAS NOT BEEN GUESSED look for guessed letter in each index of randomword array and if found - replace that index in the underscore array with letter. Add one to "numletterReplaced" to count. Check success checker to see if any letters have been replaced.  --> 
+// <!-- ONLY IF LETTER HAS NOT BEEN GUESSED look for guessed letter in each index of randomword array and if found - replace that index in the underscore array with letter. Add one to "numletterReplaced" to count. Check success checker to see if any letters have been replaced.  --> 
 
 
 
@@ -179,7 +207,7 @@ window.onload = start;
 
     if (beenguessed === 0 && guessedLetter !== "Shift" && event.key !== "Meta") {
 
-                  console.log(event);
+                 console.log(event);
                  guessedremaining--;
                  document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessedremaining;
 
@@ -209,7 +237,7 @@ window.onload = start;
                             
 
 
-<!-- if the letter existed at least once, the success checker will be different from zero. If it is zero letter is pushed into  alreadyTriedandfailed array. If it is diferent from zero letter is pushed into alreadyTriedandsucceeded --> 
+// <!-- if the letter existed at least once, the success checker will be different from zero. If it is zero letter is pushed into  alreadyTriedandfailed array. If it is diferent from zero letter is pushed into alreadyTriedandsucceeded --> 
 
                         if (successChecker === 0) {
                             alreadyTriedandfailed.push(guessedLetter);
@@ -225,6 +253,22 @@ window.onload = start;
 
                             console.log("letters replaced :" + numlettersReplaced);
                             console.log("success checker: "+successChecker);
+                            console.log("length is "+randomWord.length);
+                            console.log("letters replaced is: "+numlettersReplaced);
+
+
+                            if (numlettersReplaced === randomWord.length){
+                            console.log("win");
+                            wins++;
+                            console.log("wins: "+wins);
+                            document.getElementById("wins-innerhtml").innerHTML = "Wins: "+wins;
+                            document.getElementById("previoswordwas-innerhtml").innerHTML = "Previous word was: "+randomWord;
+
+                            nextTurn();
+
+
+                            
+                          }
 
 
 
@@ -233,42 +277,11 @@ window.onload = start;
       }
 
 
-      }
+      };
+
+
+    };
 
 
 
-
-<!-- a function that runs if letter exists nd replaces underscores with guessed letter-->
-
-
-
-
-
-
-<!-- If key is in word replace underscore with letter, in all its locations-->
-
-
-<!-- If key is not in word add to a repository of guessed letters. Do not add a second time.
- -->
-
-
-<!-- Count guesses
- -->
-
-
-<!-- Guesses counter goes down to zero
- -->
-
-
-<!-- check if more letters are missing - if not - win game. If yes - continue. Until counter hits zero.
- -->
-
-
-
-<!-- a function called replaceat that replaces a letter at index location within a word with another letter
- -->
-
- function replaceat(word, index, replacement) {
-    return word.substr(0, index-1) +replacement+ word.substr(index-1 + replacement.length);
-}
 
