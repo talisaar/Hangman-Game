@@ -15,7 +15,7 @@ console.log("newturn");
 
 // <!-- An array of words -->
 
-var wordbank = ['poop', 'scandal', 'miggs'];
+var wordbank = ['poop', 'scandal', 'miggs', 'encyclopedia'];
 var numlettersReplaced = 0;
 var failedAttempts = 0;
 var alreadyTriedandfailed = [];
