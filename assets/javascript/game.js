@@ -2,9 +2,13 @@
 var wins = 0;
 nextTurn();
 
+
+
 // The entire game is wrapped in the function nextTurn which is called upon in case of a win or loose
 
 function nextTurn() {
+
+console.log("newturn");
 
 var isfirstgame = true;
 console.log("isfirstgame: "+isfirstgame);
@@ -25,8 +29,6 @@ var alreadyTriedandfailed = [];
 var alreadyTriedandsucceeded = [];
 var beenguessed = 0;
 var guessesremaining = 15;
-
-
 
 
 
