@@ -261,7 +261,7 @@ window.onload = start;
                             wins++;
                             console.log("wins: "+wins);
                             document.getElementById("wins-innerhtml").innerHTML = "Wins: "+wins;
-                            document.getElementById("previoswordwas-innerhtml").innerHTML = "Previous word was: "+randomWord;
+                            document.getElementById("previoswordwas-innerhtml").innerHTML = "It was... "+randomWord;
                             document.getElementById("alreadyguessed-innerhtml").innerHTML = "Letters already guessed: ";
                             games++;
                             document.getElementById("games-innerhtml").innerHTML = "games: "+games;
@@ -278,7 +278,7 @@ window.onload = start;
 
                           if (guessesremaining === 0) {
 
-                          document.getElementById("previoswordwas-innerhtml").innerHTML = "Previous word was: "+randomWord;
+                          document.getElementById("previoswordwas-innerhtml").innerHTML = "It was... "+randomWord;
                           document.getElementById("alreadyguessed-innerhtml").innerHTML = "Letters already guessed: ";
                           guessesremaining = 15;
                           document.getElementById("guessesremaining-innerhtml").innerHTML = "Guesses remaining: "+guessesremaining;
