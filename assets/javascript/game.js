@@ -15,7 +15,7 @@ console.log("newturn");
 
 // <!-- An array of words -->
 
-var wordbank = ['uber', 'facebook', 'whatsapp', 'google',  'zenefits',  'pandora', 'twitter', 'pinterest', 'mailchimp', 'whisper', 'doordash', 'slack'];
+var wordbank = ['uber', 'facebook', 'whatsapp', 'google',  'zenefits',  'pandora', 'twitter', 'pinterest', 'mailchimp', 'whisper', 'doordash', 'slack', 'buzzfeed', 'muchery', 'slack', 'stripe', 'twilio', 'lyft', 'airbnb', 'quora', 'reddit', 'linkedin', 'snapchat'];
 var numlettersReplaced = 0;
 var failedAttempts = 0;
 var alreadyTriedandfailed = [];
