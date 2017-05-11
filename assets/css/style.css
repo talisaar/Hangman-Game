@@ -1,10 +1,25 @@
 
 
 h1 {
-	font-size: 26px;
+	font-size: 40px;
 	font-weight: bold;
 }
 
+html {
+	max-width: 100%;
+}
+
+
+body {
+
+
+	  background: linear-gradient(
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.7)
+    ), url('../images/code.jpg');
+	max-width: 80%;
+
+}
 
 /*#word-docwrite {
 	color: blue;
@@ -13,4 +28,98 @@ h1 {
 #word-innerhtml {
 	color:red;
 }
+
+
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+
+	font-family: 'Slabo 27px', serif;
+	color: #FFFFFF;
+
+}
+
+#word-innerhtml {
+		font-family: 'Slabo 27px', serif;
+	color: #FFFFFF;
+	font-size: 40px;
+
+}
+
+p {
+	font-size: 30px;
+	line-height: 150%;
+}
+
+#wrapper {
+	position: relative;
+	left: 200px;
+	top:50px;
+}
+
+
+
+
+#main-title {
+
+
+}
+
+#mini-title {
+
+		font-size: 20px;
+		line-height: 120%;
+
+	
+}
+
+#get-started {
+	position:relative;
+	top: -20px;
+	font-size: 20px;
+	color:green;
+	
+}
+
+#game-area {
+	position:relative;
+	left: 240px;
+	top: 70px;
+}
+
+.counters {
+	
+}
+
+	
+
+#guess-word {
+	
+}
+
+#guesses-left {
+	
+}
+
+#letters-guessed {
+	
+}
+
+#word-was {
+	
+}
+
+
 
